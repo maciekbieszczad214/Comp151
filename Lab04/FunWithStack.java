@@ -28,7 +28,10 @@ public class FunWithStack
 
                 // YOUR CODE GOES HERE
 
-
+                for (int number = decimalNumber; number >= 1; number /= 2)
+                {
+                    stack.push(number % 2);
+                }
 
                 System.out.println();
             } while (true);
