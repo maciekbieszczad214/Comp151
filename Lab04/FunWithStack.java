@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * A class that implements math operations utilizing a stack.
  *
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 01/02/2017
  */
 public class FunWithStack
