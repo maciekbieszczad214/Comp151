@@ -4,7 +4,7 @@ package Lab03;
  * A class that implements the ADT set by using a linked bag.
  * The set is never full.
  *
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 12/29/2016
  */
 public class LinkedSetWithLinkedBag<T extends Comparable<? super T>> implements SetInterface<T>
