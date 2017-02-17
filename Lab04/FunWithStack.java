@@ -14,7 +14,7 @@ public class FunWithStack
     public void decimalToBinary()
     {
         System.out.println("DECIMAL TO BINARY CONVERTER");
-        // TODO PROJECT #1
+        // TODO PROJECT #1 done
         Scanner keyboard = new Scanner(System.in);
         Stack<Integer> stack = new Stack<>();
         try
@@ -24,16 +24,22 @@ public class FunWithStack
                 System.out.println("\nPlease enter a positive integer, or type \"stop\"");
                 int decimalNumber = keyboard.nextInt();
 
-                System.out.print(decimalNumber + " in binary is --> ");
-
-                // YOUR CODE GOES HERE
-
-                for (int number = decimalNumber; number >= 1; number /= 2)
-                {
-                    stack.push(number % 2);
+                if (decimalNumber < 0) {
+                    System.out.println("Integer must be positive. Try again.");
+                    continue;
+                } else if (decimalNumber == 0) {
+                    stack.push(0);
+                } else {
+                    for (int number = decimalNumber; number >= 1; number /= 2) {
+                        stack.push(number % 2);
+                    }
                 }
 
-                System.out.println();
+                StringBuilder sb = new StringBuilder();
+                while (!stack.isEmpty()) {
+                    sb.append(stack.pop());
+                }
+                System.out.print(decimalNumber + " in binary is --> " + sb);
             } while (true);
         }
         catch (InputMismatchException ime)
@@ -44,26 +50,75 @@ public class FunWithStack
 
     public void ancientMultiplier()
     {
-        // TODO PROJECT #1
+        System.out.println("ANCIENT MULTIPLIER");
+        Scanner keyboard = new Scanner(System.in);
+
+        // TODO PROJECT #1 done
         // http://en.wikipedia.org/wiki/Ancient_Egyptian_multiplication
         Stack<Integer> op1 = new Stack<>();
         Stack<Integer> op2 = new Stack<>();
 
+        try
+        {
+            do
+            {
+                System.out.println("\nPlease enter the first operand, or type \"stop\":");
+                int operand1 = keyboard.nextInt();
 
+                System.out.println("\nPlease enter the second operand:");
+                int operand2 = keyboard.nextInt();
 
+                int greaterOp = (operand1 > operand2 ? operand1 : operand2 );
+                int lesserOp = (operand1 > operand2 ? operand2 : operand1 );
+                while (lesserOp >= 1) {
+                    op1.push(lesserOp % 2);
+                    lesserOp /= 2;
+                    op2.push(greaterOp);
+                    greaterOp *= 2;
+                }
+
+                int product = 0;
+                while (!op1.isEmpty()) {
+                    if (op1.pop() == 1) {
+                        product += op2.pop();
+                    } else {
+                        op2.pop();
+                    }
+                }
+                System.out.println(operand1 + " * " + operand2 + " = " + product);
+            } while (true);
+        }
+        catch (InputMismatchException ime)
+        {
+            System.out.println("Done with conversion.\n");
+        }
     }
 
     public ArrayList<Integer> noAdjacentDuplicates(int... input)
     {
-        // TODO PROJECT #1
-        ArrayList<Integer> result = new ArrayList<>();
+        // TODO PROJECT #1 done
         Stack<Integer> stack = new Stack<>();
 
         System.out.println("input = " + Arrays.toString(input));
 
+        for (int i = 0; i < input.length; i++) {
+            if (stack.isEmpty()) {
+                stack.push(input[i]);
+            } else {
+                if (stack.peek() != input[i]) {
+                    stack.push(input[i]);
+                } else if (i + 1 >= input.length || input[i] != input[i + 1]) {
+                    stack.pop();
+                }
+            }
+        }
 
+        Integer array[] = new Integer[stack.size()];
+        for (int i = stack.size() - 1; !stack.isEmpty() && i >= 0; i--) {
+            array[i] = stack.pop();
+        }
 
-        return result;
+        return new ArrayList<>(Arrays.asList(array));
     }
 
 
