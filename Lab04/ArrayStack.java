@@ -17,59 +17,96 @@ public final class ArrayStack<T> implements TextbookStackInterface<T>
 
 	public ArrayStack()
 	{
-		// TODO PROJECT #2
+		// TODO PROJECT #2 done
+		this(DEFAULT_CAPACITY);
 	} // end default constructor
 
 	public ArrayStack(int initialCapacity)
 	{
-		// TODO PROJECT #2
+		// TODO PROJECT #2 done
+		checkCapacity(initialCapacity);
+		@SuppressWarnings("unchecked")
+		T[] tempStack = (T[]) new Object[initialCapacity]; // Unchecked cast
+		this.myStack = tempStack;
+		this.topIndex = this.myStack.length;
+		this.initialized = true;
 	} // end constructor
 
 	public void push(T newEntry)
 	{
-		// TODO PROJECT #2
+		// TODO PROJECT #2 done
+		ensureCapacity();
+		this.myStack[this.topIndex-- - 1] = newEntry;
 	} // end push
 
 	public T peek() throws InsufficientNumberOfElementsOnStackException
 	{
-		// TODO PROJECT #2
-		return null; // THIS IS A STUB
+		// TODO PROJECT #2 done
+		if (isEmpty()) {
+			throw new InsufficientNumberOfElementsOnStackException("couldn't peek");
+		} else {
+			return this.myStack[this.topIndex];
+		}
 	} // end peek
 
 	public T pop() throws InsufficientNumberOfElementsOnStackException
 	{
-		// TODO PROJECT #2
-		return null; // THIS IS A STUB
+		// TODO PROJECT #2 done
+		if (isEmpty()) {
+			throw new InsufficientNumberOfElementsOnStackException("couldn't pop");
+		} else {
+			T old = this.myStack[this.topIndex];
+			this.myStack[this.topIndex++] = null;
+			return old;
+		}
 	} // end pop
 
 	public boolean isEmpty()
 	{
-		// TODO PROJECT #2
-		return false;  //THIS IS A STUB
+		// TODO PROJECT #2 done
+		return this.topIndex == this.myStack.length;
 	} // end isEmpty
 
 	public void clear()
 	{
-		// TODO PROJECT #2
+		// TODO PROJECT #2 done
+		while (!isEmpty()) {
+			pop();
+		}
 	} // end clear
 
 	// Throws an exception if this object is not initialized.
 	private void checkInitialization() throws SecurityException
 	{
-		// TODO PROJECT #2
+		// TODO PROJECT #2 done
+		if (!this.initialized) {
+			throw new SecurityException("array not initialized");
+		}
 	} // end checkInitialization
 
 	// Throws an exception if the client requests a capacity that is too large.
 	private void checkCapacity(int capacity) throws IllegalStateException
 	{
-		// TODO PROJECT #2
+		// TODO PROJECT #2 done
+		if (capacity > MAX_CAPACITY) {
+			throw new IllegalStateException("capacity is too large");
+		}
 	} // end checkCapacity
 
 	// Doubles the size of the array myStack if it is full
 	// Precondition: checkInitialization has been called.
 	private void ensureCapacity()
 	{
-		// TODO PROJECT #2
+		// TODO PROJECT #2 done
+		checkInitialization();
+		if (this.topIndex == 0) {
+			int extraCap = this.myStack.length; // double the capacity of the stack
+			@SuppressWarnings("unchecked")
+			T[] tempStack = (T[]) new Object[this.myStack.length + extraCap]; // Unchecked cast
+			System.arraycopy(this.myStack, 0, tempStack, extraCap, myStack.length);
+			this.myStack = tempStack;
+			this.topIndex += extraCap;
+		}
 	} // end ensureCapacity
 
 	// These methods are only for testing of the array implementation

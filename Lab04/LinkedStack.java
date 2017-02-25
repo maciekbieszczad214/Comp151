@@ -12,42 +12,63 @@ public final class LinkedStack<T> implements TextbookStackInterface<T>
 
     public LinkedStack()
     {
-        // TODO PROJECT #3
+        // TODO PROJECT #3 done
+        this.topNode = null;
     } // end default constructor
 
     public void push(T newEntry)
     {
-        // TODO PROJECT #3
+        // TODO PROJECT #3 done
+        // add to beginning of chain:
+        Node<T> newNode = new Node<>(newEntry);
+        newNode.next = this.topNode;
+        this.topNode = newNode;
     } // end push
 
     public T peek() throws InsufficientNumberOfElementsOnStackException
     {
-        // TODO PROJECT #3
-        return null; // THIS IS A STUB
+        // TODO PROJECT #3 done
+        if (this.topNode == null) {
+            throw new InsufficientNumberOfElementsOnStackException("couldn't peek");
+        } else {
+            return this.topNode.data;
+        }
     } // end peek
 
     public T peek2() throws InsufficientNumberOfElementsOnStackException
     {
-        // TODO PROJECT #3
-        return null; // THIS IS A STUB
+        // TODO PROJECT #3 done
+        if (this.topNode == null || this.topNode.next == null) {
+            throw new InsufficientNumberOfElementsOnStackException("couldn't peek2");
+        } else {
+            return this.topNode.next.data;
+        }
     } // end peek2
 
     public T pop() throws InsufficientNumberOfElementsOnStackException
     {
-        // TODO PROJECT #3
-        return null; // THIS IS A STUB
+        // TODO PROJECT #3 done
+        if (this.topNode == null) {
+            throw new InsufficientNumberOfElementsOnStackException("couldn't pop");
+        } else {
+            T result = this.topNode.data;
+            this.topNode = this.topNode.next;
+            return result;
+        }
     } // end pop
 
     public boolean isEmpty()
     {
-        // TODO PROJECT #3
-        return false;  // THIS IS A STUB
+        // TODO PROJECT #3 done
+        return this.topNode == null;
     } // end isEmpty
 
     public void clear()
     {
-        // TODO PROJECT #3
-
+        // TODO PROJECT #3 done
+        while (isEmpty()) {
+            pop();
+        }
     } // end clear
 
     // These methods are only for testing of array implementation

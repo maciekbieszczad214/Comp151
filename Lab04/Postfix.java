@@ -1,5 +1,6 @@
 package Lab04;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -20,13 +21,55 @@ public class Postfix
     public void convertToPostfix(String infix)
     {
         // TODO PROJECT #5
+        infix = infix.replaceAll("\\s","");
         System.out.println("Infix:   " + infix);
         Stack<Character> operatorStack = new Stack<>();
         StringBuilder postfix = new StringBuilder();
         int characterCount = infix.length();
         char topOperator;
 
-        // IMPLEMENT ALGORITHM 5.16
+        for (int i = 0; i < characterCount; i++) {
+            char next = infix.charAt(i);
+            switch (next) {
+                case '^':
+                    operatorStack.push(next);
+                    break;
+                case '+':
+                case '-':
+                case '*':
+                case '/':
+                    while (!operatorStack.isEmpty() && getPrecedence(next) <= getPrecedence(operatorStack.peek())) {
+                        postfix.append(operatorStack.peek());
+                        operatorStack.pop();
+                    }
+                    operatorStack.push(next);
+                    break;
+                case '(':
+                    operatorStack.push(next);
+                    break;
+                case ')':
+                    try {
+                        topOperator = operatorStack.pop();
+                        while (topOperator != '(') {
+                            postfix.append(topOperator);
+                            topOperator = operatorStack.pop();
+                        }
+                    } catch (EmptyStackException ese) {
+                        System.out.println("empty stack");
+                    }
+                    break;
+                default:
+                    if (Character.isLetter(next)) {
+                        postfix.append(next);
+                    }
+                    break;
+            }
+        }
+
+        while (!operatorStack.isEmpty()) {
+            topOperator = operatorStack.pop();
+            postfix.append(topOperator);
+        }
 
         System.out.println("Postfix: " + postfix.toString());
         System.out.println("\n");
@@ -73,9 +116,29 @@ public class Postfix
         Stack<Double> valueStack = new Stack<>();
         int characterCount = postfix.length();
 
-        // IMPLEMENT ALGORITHM 5.18
+        for (int i = 0; i < characterCount; i++) {
+            char next = postfix.charAt(i);
+            if (Character.isLetter(next)) {
+                valueStack.push(valueOf(next));
+            } else {
+                switch (next) {
+                    case '+':
+                    case '-':
+                    case '*':
+                    case '/':
+                    case '^':
+                        double operandOne = valueStack.pop();
+                        double operandTwo = valueStack.pop();
+                        double result = compute(operandTwo, operandOne, next);
+                        valueStack.push(result);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
-        return 0; // THIS IS A STUB
+        return valueStack.peek();
     } // end evaluatePostfix
 
     private double valueOf(char variable)

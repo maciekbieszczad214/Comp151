@@ -19,13 +19,25 @@ public class PalindromeChecker
      */
     public boolean isPalindrome(String input)
     {
-        // TODO PROJECT #4
-        // push half of the characters on the stack
-
-        // in another loop pop characters from the stack and compare with the remaining characters in the input string
-        // stop the loop as soon as the first unequal pair is found
-
-        return false; // THIS IS A STUB
+        // TODO PROJECT #4 done
+        boolean result = true;
+        String stripped = input.replaceAll("[\\W]", "").toLowerCase();
+        System.out.println("--> Checking: \"" + stripped + "\"");
+        int length = stripped.length();
+        if (length > 1) {
+            Stack<Character> stack = new Stack<>();
+            int index = 0;
+            while (index < length / 2) {
+                stack.push(stripped.charAt(index++));
+            }
+            index += length % 2;
+            while (result && !stack.isEmpty()) {
+                if (!stack.pop().equals(stripped.charAt(index++))) {
+                    result = false;
+                }
+            }
+        }
+        return result;
     } // end isPalindrome
 
     public static void main(String[] args)

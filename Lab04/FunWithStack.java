@@ -107,7 +107,7 @@ public class FunWithStack
             } else {
                 if (stack.peek() != input[i]) {
                     stack.push(input[i]);
-                } else if (i + 1 >= input.length || input[i] != input[i + 1]) {
+                } else if (i == input.length - 1 || input[i] != input[i + 1]) {
                     stack.pop();
                 }
             }
