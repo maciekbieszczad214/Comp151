@@ -14,7 +14,7 @@ package Lab05; /**
  *  111111111 * 111111111 is 12345678987654321 - and it is a PALINDROME
  *  1111111111 * 1111111111 is 1234567900987654321 - and it is NOT a PALINDROME.
  *
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 01/02/2017
  */
 import java.math.BigInteger;

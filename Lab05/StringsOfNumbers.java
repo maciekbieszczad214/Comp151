@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * The class recursively generates strings of n numbers
  *
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 1/02/2017
  */
 

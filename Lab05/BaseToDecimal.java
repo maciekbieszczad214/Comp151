@@ -7,7 +7,7 @@ package Lab05;
  * 2. No observe that you can display n in any base between 2 and 9 by replacing 10
  *    with the new base. Write another method to accommodate a given base.
  *
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 1/02/2017
  */
 public class BaseToDecimal

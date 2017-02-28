@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 01/02/2017
  */
 public class MazeSolverWithStack

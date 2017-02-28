@@ -3,7 +3,7 @@ package Lab05;
 import java.util.*;
 
 /**
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 01/02/2017
  * https://www.cs.bu.edu/teaching/alg/maze/
  */

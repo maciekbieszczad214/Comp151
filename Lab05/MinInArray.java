@@ -10,7 +10,7 @@ package Lab05;
  *  the array and two indices, first and last.
  *  NOTE: You can refer to the method displayArray in Segment 7.18 in the textbook for the inspiration
  *
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 01/02/2017
  */
 public class MinInArray
