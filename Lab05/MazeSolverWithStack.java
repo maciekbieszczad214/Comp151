@@ -31,25 +31,40 @@ public class MazeSolverWithStack
 
     private boolean findPath(int startRow, int startCol)
     {
-        // TODO Project #5
+        // TODO Project #5 done
         boolean result = false;
         Stack<MazeFrame> stack = new Stack<>();
         stack.push(new MazeFrame(startRow, startCol));
 
-        MazeFrame current = null;
-
-
-        // try moving up (NORTH), next try moving right (EAST),
-        // next try moving down (SOUTH), and finally try moving left (WEST)
-
+        while (!result && !stack.isEmpty()) {
+            MazeFrame topFrame = stack.pop();
+            int row = topFrame.row;
+            int col = topFrame.col;
+            if (isGoal(row, col)) {
+                result = true;
+            } else {
+                this.maze[row][col] = '+';
+                MazeFrame frames[] = {
+                        new MazeFrame(row - 1, col),
+                        new MazeFrame(row, col + 1),
+                        new MazeFrame(row + 1, col),
+                        new MazeFrame(row, col - 1)
+                };
+                for (MazeFrame frame : frames) {
+                    if (isOpen(frame.row, frame.col)) {
+                        stack.push(frame);
+                    }
+                }
+            }
+        }
 
         return result;
     }
 
     private boolean isInsideMaze(int r, int c)
     {
-        // TODO Project #5
-        return false; // THIS IS A STUB
+        // TODO Project #5 done
+        return !(r < 0 || r >= this.maze.length || c < 0 || c >= this.maze[r].length);
     }
 
     private boolean isGoal(int r, int c)
@@ -59,9 +74,8 @@ public class MazeSolverWithStack
 
     private boolean isOpen(int r, int c)
     {
-        // TODO Project #5
-        // ., S, or G would be considered open
-        return false; // THIS IS A STUB
+        // TODO Project #5 done
+        return (isInsideMaze(r, c) && (this.maze[r][c] == '.' || this.maze[r][c] == 'S' || this.maze[r][c] == 'G'));
     }
 
     private boolean setGoal(int r, int c)

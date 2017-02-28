@@ -19,17 +19,18 @@ public class StringsOfNumbers
      */
     private static void bitString(String str, int n)
     {
-        // TODO Project #2
-        // IMPLEMENT THIS RECURSIVE METHOD
-
-        // STEP#1 Base case - the string is constructed so print it
-
-
-
-        // STEP#2 recursive case - make two recursive calls:
-        //                        one to append 0 and the second one to append 1
-
-
+        // TODO Project #2 done
+        if (str.length() == 0) {
+            str = Integer.toString((int) Math.pow(2, n), 2);
+            kString(str, n, 2);
+        } else {
+            int i = Integer.parseInt(str, 2) - 1;
+            str = String.format("%" + n + "s", Integer.toString(i, 2)).replace(" ", "0");
+            System.out.println(str);
+            if (i > 0) {
+                bitString(str, n);
+            }
+        }
     }
 
     /**
@@ -41,9 +42,18 @@ public class StringsOfNumbers
      */
     private static void kString(String str, int n, int k)
     {
-        // TODO Project #2
-        // IMPLEMENT THIS RECURSIVE METHOD
-
+        // TODO Project #2 done
+        if (str.length() == 0) {
+            str = Integer.toString((int) Math.pow(k, n), k);
+            kString(str, n, k);
+        } else {
+            int i = Integer.parseInt(str, k) - 1;
+            str = String.format("%" + n + "s", Integer.toString(i, k)).replace(" ", "0");
+            System.out.println(str);
+            if (i > 0) {
+                kString(str, n, k);
+            }
+        }
     }
 
     public static void main(String args[])

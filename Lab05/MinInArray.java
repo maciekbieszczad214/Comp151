@@ -23,25 +23,21 @@ public class MinInArray
      */
     public static int minimum(int[] data, int first, int last)
     {
-        // TODO Project #6
-        int result = 0;  // THIS IS A STUB
+        // TODO Project #6 done
+        int result = 0;
 
-        // IMPLEMENT THE METHOD
+        if (data == null || data.length == 0 || first < 0 || last < 0 || first > last || last >= data.length) {
+            throw new BadArgumentsForMinimumException("invalid arguments");
+        }
 
-        // STEP #1 validate the input, if incorrect throw BadArgumentsForMinimumException with appropriate message
-
-
-
-        // STEP #2 base case: first and last are the same
-
-
-
-        // STEP #3 recursive case
-
-        // recursively find minimum in each half
-
-
-        // set result to the smallest of the two
+        if (first == last) {
+            result = data[first];
+        } else {
+            int mid = first + (last - first) / 2;
+            int minA = minimum(data, first, mid);
+            int minB = minimum(data, mid + 1, last);
+            result = Math.min(minA, minB);
+        }
 
         return result;
     } // end minimum

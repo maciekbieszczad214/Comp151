@@ -29,14 +29,22 @@ public class MazeSolver
 
     private boolean findPath(int r, int c)
     {
-        // TODO Project #4
-        return false; // THIS IS A STUB
+        // TODO Project #4 done
+        if (!isInsideMaze(r, c)) return false;
+        if (isGoal(r, c)) return true;
+        if (!isOpen(r, c)) return false;
+        this.maze[r][c] = '+';
+        if (findPath(r, c - 1)) return true;
+        if (findPath(r + 1, c)) return true;
+        if (findPath(r, c + 1)) return true;
+        if (findPath(r - 1, c)) return true;
+        return false;
     }
 
     private boolean isInsideMaze(int r, int c)
     {
-        // TODO Project #4
-        return false; // THIS IS A STUB
+        // TODO Project #4 done
+        return !(r < 0 || r >= this.maze.length || c < 0 || c >= this.maze[r].length);
     }
 
     private boolean isGoal(int r, int c)
@@ -46,9 +54,8 @@ public class MazeSolver
 
     private boolean isOpen(int r, int c)
     {
-        // TODO Project #4
-         // ., S, or G would be considered open
-        return false; // THIS IS A STUB
+        // TODO Project #4 done
+        return (this.maze[r][c] == '.' || this.maze[r][c] == 'S' || this.maze[r][c] == 'G');
     }
 
     private boolean setGoal(int r, int c)

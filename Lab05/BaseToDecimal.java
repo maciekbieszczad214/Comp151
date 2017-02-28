@@ -18,22 +18,8 @@ public class BaseToDecimal
      * @param n an integer to be displayed */
     public static String displayDigits(int n)
     {
-        // TODO Project #1
-        return "???"; // this is a stub
-
-        // IMPLEMENT THE METHOD
-
-        // STEP#1 Base case: We have a single positive digit
-
-
-
-        // STEP#2 recursive case: negative number
-
-
-
-        // STEP#3 recursive case: positive number with more than one digit
-
-
+        // TODO Project #1 done
+        return displayDigits2to9Base(n, 10);
     } // end displayDigits
 
     /** Task: Recursively displays any integer in a given base.
@@ -44,13 +30,15 @@ public class BaseToDecimal
      **/
     public static String displayDigits2to9Base(int n, int base)
     {
-        // TODO Project #1
-        return "???"; // this is a stub
-
-        // IMPLEMENT THE METHOD
-
-
-
+        // TODO Project #1 done
+        int digit = (n < 0) ? -(n % base) : (n % base);
+        if (digit == n) {
+            return "" + digit;
+        } else if (digit == -n) {
+            return "- " + digit;
+        } else {
+            return displayDigits2to9Base(n / base, base) + " " + digit;
+        }
     } // end displayDigits
 
     public static void main(String args[])

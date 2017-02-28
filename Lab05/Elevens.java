@@ -35,14 +35,16 @@ public class Elevens
 
     private static void elevenPals(BigInteger ones)
     {
-        // TODO Project #3
+        // TODO Project #3 done
         BigInteger result = ones.multiply(ones);
         System.out.print(ones + " * " + ones + " is " + result);
         boolean pal = isPalindrome(result);
         System.out.println(" - and it is " + (pal?"":"NOT ") + "a PALINDROME");
 
-        // IMPLEMENT RECURSIVE CALL HERE
-        // UTILIZE CONSTANTS FROM BigInteger CLASS
+        if (pal) {
+            ones = ones.multiply(BigInteger.TEN).add(BigInteger.ONE);
+            elevenPals(ones);
+        }
     }
 
     public static void main(String args[])
