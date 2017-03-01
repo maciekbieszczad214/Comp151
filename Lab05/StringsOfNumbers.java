@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * The class recursively generates strings of n numbers
  *
- * @author Maciek Bieszczad
+ * @author YOUR NAME
  * @version 1/02/2017
  */
 
@@ -20,17 +20,7 @@ public class StringsOfNumbers
     private static void bitString(String str, int n)
     {
         // TODO Project #2 done
-        if (str.length() == 0) {
-            str = Integer.toString((int) Math.pow(2, n), 2);
-            kString(str, n, 2);
-        } else {
-            int i = Integer.parseInt(str, 2) - 1;
-            str = String.format("%" + n + "s", Integer.toString(i, 2)).replace(" ", "0");
-            System.out.println(str);
-            if (i > 0) {
-                bitString(str, n);
-            }
-        }
+        kString(str, n, 2);
     }
 
     /**
