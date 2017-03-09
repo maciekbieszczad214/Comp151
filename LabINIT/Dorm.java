@@ -1,5 +1,7 @@
+package LabINIT;
+
 /**
- * @author YOUR NAME GOES HERE
+ * @author Maciek Bieszczad
  * @version 12/26/2016
  */
 
@@ -24,9 +26,27 @@ public class Dorm
      */
     public Dorm(Scanner fromFile)
     {
-        //TODO
-
-
+        //TODO done
+        door = new Door();
+        residents = new ArrayList<Resident>();
+        System.out.println("Processing residents list...");
+        while (fromFile.hasNextLine()) {
+            try {
+                String line = fromFile.nextLine();
+                Scanner lineScan = new Scanner(line).useDelimiter(":");
+                String name = lineScan.next();
+                int room = lineScan.nextInt();
+                String password = lineScan.next();
+                Resident resident = new Resident(name, Integer.toString(room), password);
+                System.out.println("  " + resident);
+                residents.add(resident);
+            } catch (IllegalArgumentException e) {
+                System.out.println("*** Error: Illegal argument, skipping to next line ***");
+            } catch (NoSuchElementException e) {
+                System.out.println("*** Error: No such element, skipping to next line ***");
+            }
+        }
+        System.out.println();
     }
 
     /**
@@ -37,8 +57,15 @@ public class Dorm
      */
     public Resident checkResident(String name)
     {
-        //TODO
-        return null; // THIS IS A STUB
+        //TODO done
+        Resident result = null;
+        for (Resident resident : residents) {
+            if (resident.getName().equalsIgnoreCase(name)) {
+                result = resident;
+                break;
+            }
+        }
+        return result;
     }
 
     /**
@@ -47,8 +74,11 @@ public class Dorm
      */
     public void displayResidentNames()
     {
-        //TODO
-
+        //TODO done
+        System.out.println("There are " + residents.size() + " residents in the dorm:");
+        for (Resident resident : residents) {
+            System.out.println("  " + resident);
+        }
     }
 
     /**
@@ -66,8 +96,16 @@ public class Dorm
      */
     public boolean validateAndUnlock(String name, String room, String password)
     {
-        //TODO
-        return false; // THIS IS A STUB
+        //TODO done
+        Resident resident = checkResident(name);
+        boolean match = false;
+        if (resident != null && resident.getRoom().equalsIgnoreCase(room) &&
+                resident.getPassword().equals(password)) {
+            match = true;
+            door.unlock();
+        }
+        System.out.println(door);
+        return match;
     }
 
     /**
@@ -75,7 +113,7 @@ public class Dorm
      */
     public void lockTheDoor()
     {
-        //TODO
-
+        //TODO done
+        door.lock();
     }
 }

@@ -1,5 +1,7 @@
+package LabINIT;
+
 /**
- * @author YOUR NAME GOES HERE
+ * @author Maciek Bieszczad
  * @version 01/02/2016
  */
 public class Resident
@@ -18,7 +20,10 @@ public class Resident
      */
     public Resident(String name, String room, String password)
     {
-        //TODO
+        //TODO done
+        setName(name);
+        setRoom(room);
+        setPassword(password);
     }
 
     /**
@@ -28,8 +33,8 @@ public class Resident
      */
     public String getName()
     {
-        //TODO
-        return "???"; // THIS IS A STUB
+        //TODO done
+        return name;
     }
 
     /**
@@ -39,8 +44,8 @@ public class Resident
      */
     public void setName(String name)
     {
-        //TODO
-
+        //TODO done
+        this.name = name;
     }
 
     /**
@@ -50,8 +55,8 @@ public class Resident
      */
     public String getRoom()
     {
-        //TODO
-        return "???"; // THIS IS A STUB
+        //TODO done
+        return room;
     }
 
     /**
@@ -61,8 +66,8 @@ public class Resident
      */
     public void setRoom(String room)
     {
-        //TODO
-
+        //TODO done
+        this.room = room;
     }
 
     /**
@@ -84,8 +89,12 @@ public class Resident
      */
     public void setPassword(String password) throws IllegalArgumentException
     {
-        //TODO
-
+        //TODO done
+        if (password.length() >= 3) {
+            this.password = password;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -95,7 +104,7 @@ public class Resident
      */
     public String toString()
     {
-        //TODO
-        return "Resident ???"; // THIS IS A STUB
+        //TODO done
+        return "Resident: " + name + " (room: " + room + ", password: " + password + ")";
     }
 }

@@ -1,5 +1,7 @@
+package LabINIT;
+
 /**
- * @author YOUR NAME GOES HERE
+ * @author Maciek Bieszczad
  * @version 12/26/2016
  */
 public class Door
@@ -13,8 +15,8 @@ public class Door
      */
     public Door()
     {
-        //TODO
-
+        //TODO done
+        open = LOCKED;
     }
 
     /**
@@ -24,8 +26,8 @@ public class Door
      */
     public boolean isOpen()
     {
-        //TODO
-        return false; // THIS IS A STUB
+        //TODO done
+        return open;
     }
 
     /**
@@ -34,8 +36,8 @@ public class Door
      */
     public void unlock()
     {
-        //TODO
-
+        //TODO done
+        open = UNLOCKED;
     }
 
     /**
@@ -44,8 +46,8 @@ public class Door
      */
     public void lock()
     {
-        //TODO
-
+        //TODO done
+        open = LOCKED;
     }
 
     /**
@@ -55,7 +57,7 @@ public class Door
      */
     public String toString()
     {
-        //TODO
-        return "Door ???"; // THIS IS A STUB
+        //TODO done
+        return "Door " + (isOpen() ? "unlocked" : "locked");
     }
 }
