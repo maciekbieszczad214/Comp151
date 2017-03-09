@@ -13,7 +13,7 @@ import java.util.*;
  * Modified by Anna Bieszczad
  * <p/>
  *
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 2/24/2017
  * ******************************************************************
  */
@@ -101,6 +101,8 @@ public class SortArray
 
             moves += 2;
         }
+        //System.out.print("swap(" + i + ", " + j + ") --> ");
+        //display(a);
     } // end swap
 
 
@@ -255,10 +257,12 @@ public class SortArray
         int n = last - first + 1; // number of array elements
         for (int step = n / 2; step > 0; step = step / 2)
         {
-            //TODO Project1 C
-            // YOUR CODE GOES HERE
-            for (int begin = first; begin < first + step; begin++)
-                incrementalInsertionSort(a, begin, last, step);
+            //TODO Project1 C done
+
+            if ((step & 1) == 1) {
+                for (int begin = first; begin < first + step; begin++)
+                    incrementalInsertionSort(a, begin, last, step);
+            }
         } // end for
     } // end shellSortWithNoEvenStep
 
@@ -274,6 +278,8 @@ public class SortArray
         int rightIndex = a.length - 1; // last position to check
 
         startStatistics();
+        int pass = 0;
+
         while (leftIndex < rightIndex)
         {
             for (int index = leftIndex; index < rightIndex; index++)
@@ -285,6 +291,7 @@ public class SortArray
                 } // end if
             } // end for
             rightIndex--;
+            //System.out.println("PASS: " + ++pass + " leftIndex: " + leftIndex + " rightIndex: " + rightIndex);
         } // end while
     }
 
@@ -296,9 +303,43 @@ public class SortArray
     public static <T extends Comparable<? super T>>
     void improvedBubbleSort(T[] a)
     {
+        //TODO Project1 D done
 
-        //TODO Project1 D
-        //TODO Project1 F
+        int leftIndex = 0; // first position to check
+        int rightIndex = a.length - 1; // last position to check
+
+        startStatistics();
+        int pass = 0;
+
+        boolean swapped = true;
+        while (swapped && leftIndex < rightIndex)
+        {
+            swapped = false;
+            final int NOT_FOUND = -1;
+            int lastSwap = NOT_FOUND;
+            int firstSwap = NOT_FOUND;
+            for (int index = leftIndex; index < rightIndex; index++)
+            {
+                comparisons++;
+                if (a[index].compareTo(a[index + 1]) > 0) {
+                    if (!swapped) {
+                        swapped = true;
+                    }
+                    if (firstSwap < 0) {
+                        firstSwap = index;
+                    }
+                    if (index > lastSwap) {
+                        lastSwap = index;
+                    }
+                    swap(a, index, index + 1);
+                }
+            }
+            leftIndex = (firstSwap >= 0) ? (firstSwap == 0 ? 0 : firstSwap - 1) : leftIndex;
+            rightIndex = (lastSwap >= 0) ? lastSwap : (rightIndex - 1);
+            //System.out.println("PASS: " + ++pass + " leftIndex: " + leftIndex + " rightIndex: " + rightIndex);
+        }
+
+        //TODO Project1 F done
     }
 
     /**
@@ -309,10 +350,65 @@ public class SortArray
     public static <T extends Comparable<? super T>>
     void shakerImprovedBubbleSort(T[] a)
     {
+        //TODO Project1 E done
 
-        //TODO Project1 E
-        //TODO Project1 F
+        int leftIndex = 0; // first position to check
+        int rightIndex = a.length - 1; // last position to check
 
+        startStatistics();
+        int pass = 0;
+
+        boolean swapped = true;
+        while (swapped && leftIndex < rightIndex)
+        {
+            swapped = false;
+            int lastSwap = -1;
+            int firstSwap = -1;
+            for (int index = leftIndex; index < rightIndex; index++)
+            {
+                comparisons++;
+                if (a[index].compareTo(a[index + 1]) > 0)
+                {
+                    if (!swapped) {
+                        swapped = true;
+                    }
+                    if (firstSwap < 0) {
+                        firstSwap = index;
+                    }
+                    if (index > lastSwap) {
+                        lastSwap = index;
+                    }
+                    swap(a, index, index + 1);
+                }
+            }
+            rightIndex = (lastSwap >= 0) ? lastSwap : (rightIndex - 1);
+            //System.out.println("PASS: " + ++pass + " leftIndex: " + leftIndex + " rightIndex: " + rightIndex);
+
+            if (swapped) {
+                swapped = false;
+                lastSwap = -1;
+                firstSwap = -1;
+                for (int index = rightIndex; index > leftIndex; index--) {
+                    comparisons++;
+                    if (a[index].compareTo(a[index - 1]) < 0) {
+                        if (!swapped) {
+                            swapped = true;
+                        }
+                        if (firstSwap < 0) {
+                            firstSwap = index;
+                        }
+                        if (index < lastSwap) {
+                            lastSwap = index;
+                        }
+                        swap(a, index, index - 1);
+                    }
+                }
+                leftIndex = (lastSwap >= 0) ? lastSwap : (leftIndex + 1);
+                //System.out.println("PASS: " + ++pass + " leftIndex: " + leftIndex + " rightIndex: " + rightIndex);
+            }
+        }
+
+        //TODO Project1 F done
     }
 
 
@@ -475,7 +571,13 @@ public class SortArray
 
     private static void reverseOrder(Integer[] data)
     {
-        //TODO Project1 A
+        //TODO Project1 A done
+
+        for (int i = 0; i < data.length / 2; i++) {
+            Integer tmp = data[i];
+            data[i] = data[data.length - i - 1];
+            data[data.length - i - 1] = tmp;
+        }
     }
 
     /**
@@ -488,7 +590,13 @@ public class SortArray
     {
         Integer result[] = new Integer[size];
 
-        //TODO Project1 A
+        //TODO Project1 A done
+
+        Random rand = new Random(101);
+        final int MAX_VALUE = 99;
+        for (int i = 0; i < size; i++) {
+            result[i] = rand.nextInt(MAX_VALUE + 1);
+        }
 
         return result;
     }

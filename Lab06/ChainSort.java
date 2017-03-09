@@ -9,7 +9,7 @@ import java.util.*;
  * @author Charles Hoot
  * @author Frank M. Carrano
  *         Modified by Anna Bieszczad
- * @author YOUR NAME
+ * @author Maciek Bieszczad
  * @version 2/24/2017
  */
 public class ChainSort<T extends Comparable<? super T>>
@@ -70,12 +70,28 @@ public class ChainSort<T extends Comparable<? super T>>
 
     public void shellSort(int first, int last)
     {
-        //TODO Project3
+        //TODO Project3 done
 
-        // for each space
-        //     create sub-chains
-        //     call incrementalInsertionSort
+        int n = last - first + 1; // number of nodes in chain
+        for (int space = n / 2; space > 0; space = space / 2) {
+            int count = 0;
+            for (Node<T> node = this.firstNode; node != null; node = node.next) {
+                int idx = count - space;
+                node.previous = idx < 0 ? null : getNodeAtIndex(idx);
+                count++;
+            }
+            for (int begin = first; begin < first + space; begin++) {
+                incrementalInsertionSort(begin - 1, last - 1, space);
+            }
+        }
     } // end shellSort
+
+    private Node<T> getNodeAtIndex(int idx)
+    {
+        Node<T> node = this.firstNode;
+        for (int i = 0; i < idx && node != null; i++, node = node.next);
+        return node;
+    }
 
     /**
      * Task: Sorts equally spaced elements of a linked chain into
@@ -88,7 +104,16 @@ public class ChainSort<T extends Comparable<? super T>>
      */
     private void incrementalInsertionSort(int first, int last, int space)
     {
-        //TODO Project3
+        //TODO Project3 done
+        for (int unsorted = first + space; unsorted <= last; unsorted += space) {
+            Node<T> node = getNodeAtIndex(unsorted);
+            T firstUnsorted = node.data;
+            while (node.previous != null && firstUnsorted.compareTo(node.previous.data) < 0) {
+                node.data = node.previous.data;
+                node = node.previous;
+            }
+            node.data = firstUnsorted;
+        }
     } // end incrementalInsertionSort
 
 
